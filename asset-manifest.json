@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Movie-ticket/static/css/main.e6c13ad2.css",
+    "main.js": "/Movie-ticket/static/js/main.cefcb798.js",
+    "static/js/453.2234a667.chunk.js": "/Movie-ticket/static/js/453.2234a667.chunk.js",
+    "index.html": "/Movie-ticket/index.html",
+    "main.e6c13ad2.css.map": "/Movie-ticket/static/css/main.e6c13ad2.css.map",
+    "main.cefcb798.js.map": "/Movie-ticket/static/js/main.cefcb798.js.map",
+    "453.2234a667.chunk.js.map": "/Movie-ticket/static/js/453.2234a667.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.cefcb798.js"
+  ]
+}
