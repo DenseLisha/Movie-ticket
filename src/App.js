@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import BookingForm from "./Components/BookingForm";
+import EventDetailsPage from "./Components/EventDetailsPage";
+import EventListingPage from "./Components/EventListingPage";
+ const App=()=>{
+  const [selectedEvent, setSelectedEvent] = useState(null)
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+  const handleEventSelect=(event)=>{
+    setSelectedEvent(event)
+  }
+  return(
+    <>
+    <h1>BookMyShow</h1>
+    {selectedEvent ? (
+      <EventDetailsPage selectedEvent={selectedEvent}/>
+    ):
+    (
+      <EventListingPage onEventSelect={handleEventSelect}/>
+    )}
+    
+    </>
+  )
+ }
+ export default App;
