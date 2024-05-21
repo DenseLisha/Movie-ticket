@@ -1,27 +1,18 @@
 
-import React, { useState } from 'react';
-import BookingForm from './Components/BookingForm';
-import EventDetailsPage from './Components/EventDetailsPage';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EventListingPage from './Components/EventListingPage';
-import eventsData from './data/eventData';
+import EventDetailsPage from './Components/EventDetailsPage';
 
-const App = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
-  const handleEventSelect = (event) => {
-    setSelectedEvent(event);
-  };
-
-  return (
-    <>
-      <h1>BookMyShow</h1>
-      {selectedEvent ? (
-        <EventDetailsPage selectedEvent={selectedEvent} />
-      ) : (
-        <EventListingPage onEventSelect={handleEventSelect} />
-      )}
-    </>
-  );
-};
+function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<EventListingPage />} />
+                <Route path="/event/:id" element={<EventDetailsPage />} />
+            </Routes>
+        </Router>
+    );
+}
 
 export default App;

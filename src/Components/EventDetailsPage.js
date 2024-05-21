@@ -1,17 +1,30 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import eventsData from '../data/eventData';
 import BookingForm from './BookingForm';
 
-const EventDetailsPage = ({ selectedEvent }) => {
-  return (
-    <div>
-      <h2>{selectedEvent.name}</h2>
-      <p>{selectedEvent.description}</p>
-      <p>Date: {selectedEvent.date}</p>
-      <p>Location: {selectedEvent.location}</p>
-      <BookingForm event={selectedEvent} />
-    </div>
-  );
+const EventDetailsPage = () => {
+    const { id } = useParams();
+    const event = eventsData.find(event => event.id === parseInt(id));
+    const [availability, setAvailability] = useState(event.availability);
+
+    const handleBooking = (tickets) => {
+        setAvailability(prev => prev - tickets);
+    };
+
+    if (!event) return <p>Event not found</p>;
+
+    return (
+        <div>
+            <h1>{event.name}</h1>
+            <p>Date: {event.date}</p>
+            <p>Time: {event.time}</p>
+            <p>Venue: {event.venue}</p>
+            <p>Availability: {availability}</p>
+            <BookingForm event={event} availability={availability} onBooking={handleBooking} />
+        </div>
+    );
 };
 
 export default EventDetailsPage;

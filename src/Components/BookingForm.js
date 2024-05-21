@@ -1,33 +1,34 @@
 
 import React, { useState } from 'react';
 
-const BookingForm = ({ event }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [tickets, setTickets] = useState(1);
+const BookingForm = ({ event, availability, onBooking }) => {
+    const [tickets, setTickets] = useState(1);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Booking confirmed for ${name} to ${event.name} with ${tickets} tickets.`);
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (tickets <= 0 || tickets > availability) {
+            alert("Invalid number of tickets");
+            return;
+        }
+        onBooking(tickets);
+        alert(`Successfully booked ${tickets} tickets for ${event.name}`);
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </div>
-      <div>
-        <label>Tickets:</label>
-        <input type="number" value={tickets} min="1" onChange={(e) => setTickets(e.target.value)} required />
-      </div>
-      <button type="submit">Book Now</button>
-    </form>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                Number of tickets:
+                <input
+                    type="number"
+                    value={tickets}
+                    onChange={(e) => setTickets(parseInt(e.target.value))}
+                    min="1"
+                    max={availability}
+                />
+            </label>
+            <button type="submit">Book Tickets</button>
+        </form>
+    );
 };
 
 export default BookingForm;
